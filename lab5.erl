@@ -1,3 +1,4 @@
+% Author: Johan Oakes
 % Lab 5 Functions in Erlang
 -module(lab5).
 -export([fourthPower/1,  fourthPower2/1, median3/1, factorial/1, getNth/2, largest/1, contains/2, logarithm/2]).
