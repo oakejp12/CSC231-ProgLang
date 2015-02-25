@@ -3,6 +3,24 @@
 -module(lab6Examples).
 -export([reverseLab5/1, reverse/1, merge/2, contains/2, power20/1, split/1, mergeSort/1, square/1, map/2, squareList/1]).
 
+largest(L) ->
+	if (tl(L) == []) ->
+		hd(L);
+	true ->
+		if (hd(L) > hd(tl(L))) ->
+			largest([hd(L) | tl(tl(L))]);
+		true ->
+			largest(tl(L))
+		end
+	end.
+
+
+
+
+
+
+
+
 reverseLab5(L) ->
 if 
 	L == [] ->
