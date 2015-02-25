@@ -40,8 +40,9 @@ largest(L) ->
 % Return true if list contains data item
 contains(Elem, L) ->
 	if
+		L == [] -> false;
 		Elem == hd(L) -> true;
-		Elem /= hd(L) -> contains(Elem, tl(L));
+		Elem /= hpd(L) -> contains(Elem, tl(L));
 		true -> false
 	end.
 
