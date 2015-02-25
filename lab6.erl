@@ -14,6 +14,12 @@ productOfPairs([X]) ->
 productOfPairs([X | XS]) ->
 	[X * hd(XS) | productOfPairs(tl(XS))].
 
+% 
+% All poly_ recurvsive functions below: 
+% 	Use patterns in place of hd & tl calls
+%	Cannot use local variables
+%
+
 % test2a() 
 % Add two polynomials together w/ certain constraints
 polyadd([], []) ->
@@ -41,8 +47,11 @@ polydiff([X|XS], [Y|YS]) ->
 % Evaluates polynomial for a given input value
 polyeval([], _) ->
 	0;
-polyeval([X | XS], N) ->
-		
+polyeval([C | CS], N) ->
+	C + (N * polyeval(CS, N)).
+
+
+			
 
 
 
