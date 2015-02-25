@@ -4,6 +4,8 @@
 -export ([productOfPairs/1, polyadd/2, polydiff/2, polyeval/2]).
 
 % test1()
+% Allows you to multiply consecutive elements in a lists
+%	productOfPairs([1,2,3,4]) -> [2,12]
 % TODO: Look to amend the last function - replacing hd/tl calls
 productOfPairs([]) ->
 	[];
@@ -13,6 +15,7 @@ productOfPairs([X | XS]) ->
 	[X * hd(XS) | productOfPairs(tl(XS))].
 
 % test2a() 
+% Add two polynomials together w/ certain constraints
 polyadd([], []) ->
 	[];
 polyadd(List1, []) ->
@@ -24,6 +27,7 @@ polyadd([X|XS], [Y|YS]) ->
 
 
 % test2b()
+% Subtract two polynomials together w/ certain constraints
 polydiff([],[]) ->
 	[];
 polydiff(List1, []) ->
@@ -34,10 +38,11 @@ polydiff([X|XS], [Y|YS]) ->
 	[X - Y | polydiff(XS, YS)].
 
 % test2c()
+% Evaluates polynomial for a given input value
 polyeval([], _) ->
 	0;
 polyeval([X | XS], N) ->
-	
+		
 
 
 
