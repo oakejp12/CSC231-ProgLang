@@ -23,7 +23,6 @@ polyadd([X|XS], [Y|YS]) ->
 	[X + Y | polyadd(XS,YS)].
 
 
-
 % test2b()
 polydiff([],[]) ->
 	[];
