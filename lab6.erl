@@ -1,7 +1,7 @@
  % Author: Johan Oakes
 % Lab 6 Functions in Erlang
 -module (lab6).
--export ([productOfPairs/1, polyadd/2, polydiff/2, polyeval/2, largest/1]).
+-export ([remove/2, delete/2, productOfPairs/1, polyadd/2, polydiff/2, polyeval/2, largest/1]).
 
 % test1()
 % Allows you to multiply consecutive elements in a lists
@@ -62,9 +62,15 @@ polyeval([C | CS], N) ->
 % member(X,S) -> true if element X is in the set S.
 
 
+
 % test3b()
 % delete(X,S) -> removes x from the set S if X is present in the set
-
+delete(_, []) ->
+	[];
+delete(X, [X | XS]) ->
+	XS;
+delete(X, [Y | YS]) ->
+	[Y] ++ delete(X,YS).
 
 % test3c()
 % insert(X,S) -> add X to set S if X is not already present in set
@@ -91,7 +97,27 @@ largest(L) ->
 	end.
 
 
+%------------------------------------------
+% Implement descending selection sort
+% Three methods: largest, remove, selectionSort
+%------------------------------------------
 
+% Should resemble set delete(X,S)
+% Remove an element from the list if present
+remove(_, []) -> 
+	[];
+remove(X, [X | XS]) > 
+	XS;
+remove(X, [Y | YS]) ->
+	[Y] ++ remove(YS);
+	
+
+% selectionSort([]) -> 
+% 	[];
+% selectionSort([X]) -> 
+% 	X.
+% selectionSort(SelList) ->
+% 	{Max, Rest} = largest(SelList),  
 
 
 
