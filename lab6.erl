@@ -1,7 +1,7 @@
  % Author: Johan Oakes
 % Lab 6 Functions in Erlang
 -module (lab6).
--export ([productOfPairs/1, polyadd/2, polydiff/2, polyeval/2, member/2, delete/2, insert/2, largest/1]).
+-export ([productOfPairs/1, polyadd/2, polydiff/2, polyeval/2, largest/1]).
 
 % test1()
 % Allows you to multiply consecutive elements in a lists
@@ -80,11 +80,11 @@ polyeval([C | CS], N) ->
 largest(L) ->
 	N = hd(L), M = tl(L),
 	if 
-		tl(L) == [] -> 
+		M == [] -> 
 			N;
 	true ->
-		if (N > N(M)) -> 
-			largest([N | M(M)]);
+		if (N > hd(M)) -> 
+			largest([N | tl(M)]);
 		true -> 
 			largest(M)
 		end
