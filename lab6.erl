@@ -1,7 +1,7 @@
  % Author: Johan Oakes
 % Lab 6 Functions in Erlang
 -module (lab6).
--export ([flipSigns/1,member/2, remove/2, delete/2, insert/2, productOfPairs/1, polyadd/2, polydiff/2, polyeval/2, largest/1]).
+-export ([truncateWords/1, flipSigns/1,member/2, remove/2, delete/2, insert/2, productOfPairs/1, polyadd/2, polydiff/2, polyeval/2, largest/1]).
 
 % test1()
 % Allows you to multiply consecutive elements in a lists
@@ -95,6 +95,7 @@ insert(X, [Y | YS]) ->
 %	reduce the number of times hd & tl are called
 %------------------------------------------
 
+%`test4().
 largest(L) ->
 	N = hd(L), M = tl(L),
 	if 
@@ -135,8 +136,10 @@ remove(X, [Y | YS]) ->
 %------------------------------------------
 % Use map() to map functions across a list of elements 
 % flipSigns flips the sign of a number in a input list
-% truncateWords 
+% truncateWords truncates each string in a list of strings
+%	so it is no more than four char's long
 %------------------------------------------
+
 map(_,[]) ->
 	[];
 map(F,[X|XS]) ->
@@ -148,12 +151,35 @@ flipSign(X) ->
 		true -> X + (-2*X)
 	end.
 
+% test6a().
 flipSigns([]) -> [];
-flipSigns(L) ->
-	map(fun flipSign/1, L).
+flipSigns([X|XS]) ->
+	map(fun flipSign/1, [X|XS]).
 
 
-truncateWords([])-> [].
+% Helper function to cut off indices
+chop([X|XS], S) ->
+	A = S - 1, 
+	if 
+		S < 0 -> "Out of bounds";
+		S >= length([X|XS]) -> [X|XS];
+		S == 0 -> [];
+		true -> [X] ++ chop(XS, A)
+	end.
+
+% Helper function so I can call chop(L,4)
+truncate([]) ->
+	[];
+truncate([X|XS]) ->
+	chop([X|XS], 4).
+
+% test6b().
+% map out truncate of all indices of strings
+truncateWords([]) ->
+	[];
+truncateWords([X|XS]) ->
+	map(fun truncate/1, [X|XS]).
+
 
 
 
