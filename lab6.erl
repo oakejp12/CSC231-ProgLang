@@ -1,7 +1,7 @@
  % Author: Johan Oakes
 % Lab 6 Functions in Erlang
 -module (lab6).
--export ([selectionSort/1,member/2, remove/2, delete/2, insert/2, productOfPairs/1, polyadd/2, polydiff/2, polyeval/2, largest/1]).
+-export ([flipSigns/1,member/2, remove/2, delete/2, insert/2, productOfPairs/1, polyadd/2, polydiff/2, polyeval/2, largest/1]).
 
 % test1()
 % Allows you to multiply consecutive elements in a lists
@@ -133,14 +133,29 @@ remove(X, [Y | YS]) ->
 
 
 %------------------------------------------
-% 
-%
-%
+% Use map() to map functions across a list of elements 
+% flipSigns flips the sign of a number in a input list
+% truncateWords 
 %------------------------------------------
-
-map(F,[]) ->
+map(_,[]) ->
 	[];
 map(F,[X|XS]) ->
-	[F(X)|map(F,XS)].
+	[F(X)| map(F,XS)].
+
+flipSign(X) ->
+	if
+		X > 0 -> X - (2*X);
+		true -> X + (-2*X)
+	end.
+
+flipSigns([]) -> [].
+flipSigns(L) ->
+	map(fun flipSign/1, L).
+
+
+truncate
+
+
+
 
 
