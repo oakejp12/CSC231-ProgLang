@@ -1,7 +1,7 @@
  % Author: Johan Oakes
 % Lab 6 Functions in Erlang
 -module (lab6).
--export ([member/2, remove/2, delete/2, productOfPairs/1, polyadd/2, polydiff/2, polyeval/2, largest/1]).
+-export ([member/2, remove/2, delete/2, insert/2, productOfPairs/1, polyadd/2, polydiff/2, polyeval/2, largest/1]).
 
 % test1()
 % Allows you to multiply consecutive elements in a lists
@@ -73,13 +73,20 @@ member(X, [_ | YS]) ->
 delete(_, []) ->
 	[];
 delete(X, [X | XS]) ->
-	XS;
+	delete(X, XS);
 delete(X, [Y | YS]) ->
-	[Y] ++ delete(X,YS).
+	[Y] ++ delete(X, YS).
 
 % test3c()
 % insert(X,S) -> add X to set S if X is not already present in set
-
+% Use 'case exp of' to check if X in S
+insert(X, []) ->
+	[X];
+insert(X, [Y | YS]) ->
+	case member(X, [Y | YS]) of
+		true -> [Y | YS];
+		false -> [X] ++ [Y | YS]
+	end.
 
 
 %------------------------------------------
