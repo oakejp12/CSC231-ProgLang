@@ -148,12 +148,12 @@ flipSign(X) ->
 		true -> X + (-2*X)
 	end.
 
-flipSigns([]) -> [].
+flipSigns([]) -> [];
 flipSigns(L) ->
 	map(fun flipSign/1, L).
 
 
-truncate
+truncateWords([])-> [].
 
 
 
