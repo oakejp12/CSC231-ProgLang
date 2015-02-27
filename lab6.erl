@@ -1,7 +1,7 @@
  % Author: Johan Oakes
 % Lab 6 Functions in Erlang
 -module (lab6).
--export ([member/2, remove/2, delete/2, insert/2, productOfPairs/1, polyadd/2, polydiff/2, polyeval/2, largest/1]).
+-export ([selectionSort/1,member/2, remove/2, delete/2, insert/2, productOfPairs/1, polyadd/2, polydiff/2, polyeval/2, largest/1]).
 
 % test1()
 % Allows you to multiply consecutive elements in a lists
@@ -127,11 +127,20 @@ remove(X, [Y | YS]) ->
 % selectionSort([]) -> 
 % 	[];
 % selectionSort([X]) -> 
-% 	X.
+% 	[X];
 % selectionSort(SelList) ->
-% 	{Max, Rest} = largest(SelList),  
+% 	A = largest(SelList), remove(A, SelList), selectionSort(SelList).
 
 
+%------------------------------------------
+% 
+%
+%
+%------------------------------------------
 
+map(F,[]) ->
+	[];
+map(F,[X|XS]) ->
+	[F(X)|map(F,XS)].
 
 
