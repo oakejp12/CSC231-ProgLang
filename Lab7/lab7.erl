@@ -49,10 +49,11 @@ filter(P,[X|XS]) ->
 % ---------------------------------------------------------------------- %
 
 % Check whether input is even or not
-even(X) -> 
+even(X) ->
+	N = (X rem 2),
 	if
-		(X rem 2) == 0 -> true;
-		true -> false
+		N == 0 -> true;
+		N == 1 -> false
 	end.
 	
 % Extracts the evens out from a list
