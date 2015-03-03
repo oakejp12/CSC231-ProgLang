@@ -1,0 +1,36 @@
+Author: Johan Oakes
+Date: March 3, 2015
+
+
+
+1.
+	a. even(x) : Perform modular arithmetic on the input X so that it will be easier to conclude whether X is even or odd. Simple mathematics is used to conclude that any number X modulo 2 is even if the result is zero. 
+
+	extractEvens(L) : First, I took care of the empty case for general purposes. Then I chose to utilize filter since it would create the new list M of even elements from the input list by utilizing even(x) over all of the elements.
+
+	b. alphaWord(A) : Since strings are treated as lists in Erlang, grabbing the head of the input list is equivalent to looking at the first letter or first index. Thus we can compare the first index to Erlang's $charOfInterest which will then yield our desired result. I decided to cover all logical cases instead of utilizing a 'catch all' clause since it is easier to read.
+
+	extractAWords(L) : Same idea as extractEvens(L) but adapted for context purposes. 
+
+	c. logic(X,Y) : Since logical OR allows one or both input parameters to be true, I simply check to see if any input is true, thus the result would automatically result in a truth. 
+
+	logicalOR(L) : Utilizes the reduce function in order to logical OR over the whole list in its cascading manner (if that's the right set of words). Data would resemble: 
+	T OR (T OR (T OR (F OR T)) ...
+
+	d. isLong(S) : Utilizes provided function length from earlier lab in order to find out the length of a list. Since strings are treated as lists, this gives me my desired result of looking for string length. 
+
+	longStrings(L) : Same idea as extractEvens(L) but adapted for context purposes.
+
+	e. append(S1, S2) : Also utilizes the idea that strings are handled in the same way as lists. Thus, like concatenating two lists, we can also concatenate two strings together by the '++' operator. 
+
+	strcat(L) : Same idea as logicalOR(L) but adapted for context purposes. 
+
+	f. isLarger(E1,E2) : Apply simple mathematics since we are dealing with real numbers, not integers. Thus, by subtacting two numbers, one result is bound to be positive. For negative numbers, subtracting a negative will result in a positive result if one is truly greater than the other. For cases that they may be equal, returning one of the input elements is sufficient.
+
+
+ 
+
+
+
+
+

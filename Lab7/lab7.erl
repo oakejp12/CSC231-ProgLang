@@ -1,5 +1,5 @@
 -module(lab7).
--export([evaluate/1, findInTree/2, max/1, strcat/1, longStrings/1, logicalOR/1, extractAWords/1, extractEvens/1, map/2,reduce/2,filter/2,getStringTree/0,stringToFloat/1,getExpression1/0,getExpression2/0,getExpression3/0]).
+-export([isLarger/2, evaluate/1, findInTree/2, max/1, strcat/1, longStrings/1, logicalOR/1, extractAWords/1, extractEvens/1, map/2,reduce/2,filter/2,getStringTree/0,stringToFloat/1,getExpression1/0,getExpression2/0,getExpression3/0]).
 
 -record(binaryTreeNode, {value,left=null,right=null}).
 -record(binaryTree, {rootNode=null}).
@@ -69,7 +69,8 @@ alphaWord(A) ->
 	if
 		M == $a -> true;
 		M == $A -> true;
-		true -> false
+		M /= $a -> false;
+		M /= $A -> false
 	end.
 
 % Extracts all words that begin with an 'a' or an 'A'
