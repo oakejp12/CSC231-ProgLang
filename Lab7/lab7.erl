@@ -1,5 +1,5 @@
 -module(lab7).
--export([extractEvens/1, map/2,reduce/2,filter/2,getStringTree/0,stringToFloat/1,getExpression1/0,getExpression2/0,getExpression3/0]).
+-export([logicalOR/1, extractAWords/1, extractEvens/1, map/2,reduce/2,filter/2,getStringTree/0,stringToFloat/1,getExpression1/0,getExpression2/0,getExpression3/0]).
 
 -record(binaryTreeNode, {value,left=null,right=null}).
 -record(binaryTree, {rootNode=null}).
@@ -53,9 +53,30 @@ extractEvens(L) ->
 	filter(fun even/1, L).
 
 
+% Check whether input begins with an 'a' or an 'A'
+alphaWord(A) ->
+	M = hd(A),
+	if
+		M == $a -> true;
+		M == $A -> true;
+		true -> false
+	end.
 
+% Extracts all words that begin with an 'a' or an 'A'
+% from an input list
+extractAWords(L) ->
+	filter(fun alphaWord/1, L).
 
+% Function to logically OR two input parameters
+logic(X,Y) -> 
+	if
+		X == true -> true;
+		Y == true -> true;
+		true -> false
+	end.
 
-
+% Find the logical OR of a list of Boolean values.
+logicalOR(L) ->
+	reduce(fun logic/2, L).
 
 
