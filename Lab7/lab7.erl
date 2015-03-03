@@ -1,5 +1,5 @@
 -module(lab7).
--export([max/1, strcat/1, longStrings/1, logicalOR/1, extractAWords/1, extractEvens/1, map/2,reduce/2,filter/2,getStringTree/0,stringToFloat/1,getExpression1/0,getExpression2/0,getExpression3/0]).
+-export([evaluate/1, findInTree/2, max/1, strcat/1, longStrings/1, logicalOR/1, extractAWords/1, extractEvens/1, map/2,reduce/2,filter/2,getStringTree/0,stringToFloat/1,getExpression1/0,getExpression2/0,getExpression3/0]).
 
 -record(binaryTreeNode, {value,left=null,right=null}).
 -record(binaryTree, {rootNode=null}).
@@ -109,6 +109,39 @@ isLarger(EL1, EL2) ->
 % Find the maximum element of a list
 max([]) -> [];
 max(L) -> reduce(fun isLarger/2, L).
+
+
+% findInTree takes a string label S to search for & 
+% 	the tree T to search within as arguments.
+% Send the rootNode of the tree to search
+findInTree(String, Tree) ->
+	search(String, Tree#binaryTree.rootNode).
+
+% Search the empty tree
+% Use orelse since it resembles the ';'
+search(_, null) -> false;
+search(String, Tree) ->
+	String == Tree#binaryTreeNode.value
+	orelse search(String, Tree#binaryTreeNode.left)
+	% Search right subtree if S isn't present in left
+	orelse search(String, Tree#binaryTreeNode.right).
+
+
+% Evaluates mathematical expressions from binary tress
+evaluate(T) ->
+	lookUP(T#binaryTree.rootNode).
+
+% Recursively move up through the binary tree, evaluate
+% mathematical expressions through operators
+lookUP(T) ->
+	if
+		T#binaryTreeNode.value == "+" -> lookUP(T#binaryTreeNode.left) + lookUP(T#binaryTreeNode.right);
+		T#binaryTreeNode.value == "-" -> lookUP(T#binaryTreeNode.left) - lookUP(T#binaryTreeNode.right);
+		T#binaryTreeNode.value == "*" -> lookUP(T#binaryTreeNode.left) * lookUP(T#binaryTreeNode.right);
+		T#binaryTreeNode.value == "/" -> lookUP(T#binaryTreeNode.left) / lookUP(T#binaryTreeNode.right);
+		true -> stringToFloat(T#binaryTreeNode.value)
+	end.
+
 
 
 
