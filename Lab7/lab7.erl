@@ -1,5 +1,5 @@
 -module(lab7).
--export([longStrings/1, logicalOR/1, extractAWords/1, extractEvens/1, map/2,reduce/2,filter/2,getStringTree/0,stringToFloat/1,getExpression1/0,getExpression2/0,getExpression3/0]).
+-export([max/1, strcat/1, longStrings/1, logicalOR/1, extractAWords/1, extractEvens/1, map/2,reduce/2,filter/2,getStringTree/0,stringToFloat/1,getExpression1/0,getExpression2/0,getExpression3/0]).
 
 -record(binaryTreeNode, {value,left=null,right=null}).
 -record(binaryTree, {rootNode=null}).
@@ -49,8 +49,8 @@ even(X) ->
 	end.
 	
 % Extracts the evens out from a list
-extractEvens(L) ->
-	filter(fun even/1, L).
+extractEvens([]) -> [];
+extractEvens(L) -> filter(fun even/1, L).
 
 
 % Check whether input begins with an 'a' or an 'A'
@@ -64,8 +64,8 @@ alphaWord(A) ->
 
 % Extracts all words that begin with an 'a' or an 'A'
 % from an input list
-extractAWords(L) ->
-	filter(fun alphaWord/1, L).
+extractAWords([]) -> [];
+extractAWords(L) -> filter(fun alphaWord/1, L).
 
 % Function to logically OR two input parameters
 logic(X,Y) -> 
@@ -76,8 +76,8 @@ logic(X,Y) ->
 	end.
 
 % Find the logical OR of a list of Boolean values.
-logicalOR(L) ->
-	reduce(fun logic/2, L).
+logicalOR([]) -> "No input parameters to OR";
+logicalOR(L) -> reduce(fun logic/2, L).
 
 
 % Check if string is longer than 3 characters
@@ -87,11 +87,28 @@ isLong(S) ->
 		true -> false
 	end.
 
-
 % Filter out elements of a list longer than 3 characters
-longStrings(List) ->
-	filter(fun isLong/1, List).
+longStrings([]) -> [];
+longStrings(List) -> filter(fun isLong/1, List).
 
+% Append two strings together
+append(String1, String2) -> String1 ++ String2.
+
+% Concatenate a list of strings
+strcat([]) -> [];
+strcat(L) -> reduce(fun append/2, L).
+
+isLarger(EL1, EL2) ->
+	if 
+		(EL1 - EL2) > 0 -> EL1;
+		(EL2 - EL1) > 0 -> EL2;
+		true -> EL1 % Since we are supposing they are the same
+	end.
+
+% Take care of empty case
+% Find the maximum element of a list
+max([]) -> [];
+max(L) -> reduce(fun isLarger/2, L).
 
 
 
