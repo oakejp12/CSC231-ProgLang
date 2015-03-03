@@ -19,12 +19,15 @@ getExpression3() ->
 stringToFloat(X) -> 
 	element(1,string:to_float(X)).
 
+% Helper function used to map out an auxiliary function
+% over a list of elements
 map(_,[]) ->
 	[];
 map(F,[X|XS]) ->
 	[F(X)|map(F,XS)].
 
-
+% Takes an assoc. function F and a list L of data and 
+% returns the result of F(data1, F(data2,..., F(dataN))).
 reduce(_, [A]) ->
 	A;
 reduce(F, [A|AS]) ->
@@ -41,6 +44,10 @@ filter(P,[X|XS]) ->
 		filter(P,XS)
 	end.
 
+
+% ---------------------------------------------------------------------- %
+% ---------------------------------------------------------------------- %
+
 % Check whether input is even or not
 even(X) -> 
 	if
@@ -52,6 +59,8 @@ even(X) ->
 extractEvens([]) -> [];
 extractEvens(L) -> filter(fun even/1, L).
 
+% ---------------------------------------------------------------------- %
+% ---------------------------------------------------------------------- %
 
 % Check whether input begins with an 'a' or an 'A'
 alphaWord(A) ->
@@ -67,6 +76,9 @@ alphaWord(A) ->
 extractAWords([]) -> [];
 extractAWords(L) -> filter(fun alphaWord/1, L).
 
+% ---------------------------------------------------------------------- %
+% ---------------------------------------------------------------------- %
+
 % Function to logically OR two input parameters
 logic(X,Y) -> 
 	if
@@ -79,6 +91,8 @@ logic(X,Y) ->
 logicalOR([]) -> "No input parameters to OR";
 logicalOR(L) -> reduce(fun logic/2, L).
 
+% ---------------------------------------------------------------------- %
+% ---------------------------------------------------------------------- %
 
 % Check if string is longer than 3 characters
 isLong(S) ->
@@ -91,12 +105,18 @@ isLong(S) ->
 longStrings([]) -> [];
 longStrings(List) -> filter(fun isLong/1, List).
 
+% ---------------------------------------------------------------------- %
+% ---------------------------------------------------------------------- %
+
 % Append two strings together
 append(String1, String2) -> String1 ++ String2.
 
 % Concatenate a list of strings
 strcat([]) -> [];
 strcat(L) -> reduce(fun append/2, L).
+
+% ---------------------------------------------------------------------- %
+% ---------------------------------------------------------------------- %
 
 isLarger(EL1, EL2) ->
 	if 
@@ -110,6 +130,8 @@ isLarger(EL1, EL2) ->
 max([]) -> [];
 max(L) -> reduce(fun isLarger/2, L).
 
+% ---------------------------------------------------------------------- %
+% ---------------------------------------------------------------------- %
 
 % findInTree takes a string label S to search for & 
 % 	the tree T to search within as arguments.
@@ -126,6 +148,8 @@ search(String, Tree) ->
 	% Search right subtree if S isn't present in left
 	orelse search(String, Tree#binaryTreeNode.right).
 
+% ---------------------------------------------------------------------- %
+% ---------------------------------------------------------------------- %
 
 % Evaluates mathematical expressions from binary tress
 evaluate(T) ->
