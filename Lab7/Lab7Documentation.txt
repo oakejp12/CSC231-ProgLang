@@ -27,8 +27,16 @@ Date: March 3, 2015
 
 	f. isLarger(E1,E2) : Apply simple mathematics since we are dealing with real numbers, not integers. Thus, by subtacting two numbers, one result is bound to be positive. For negative numbers, subtracting a negative will result in a positive result if one is truly greater than the other. For cases that they may be equal, returning one of the input elements is sufficient.
 
+2. 
+	findInTree(String, Tree) : Instantly send the work to be done by search(String, Tree) and pass the root node of the tree. Returns the value of search(String, Tree).
 
- 
+	search(String, Tree) : Performs all the work of searching through the tree. I first test the empty tree and return null since the string will obviously not be present. Else, I perform the recursive search the tree. I first look in the root node of the particular subtree. If it's not present, I utilize the 'orelse' statement that allows me to execute the following expression only if the former expression returned false. By using the 'orelse' statement, I am sure that my function is n-bounded since it will only execute the following statement if it needs to, or if the string is not found in the root node. Thus, if the string is found then my function will automatically return true without proceeding further. Moreover, if the string is not found in the left subtree, I look in the right subtree by also utilizing the 'orelse' statement. 
+
+3.
+	evaluate(T) : Instantly send the work to be done by lookUP(T) starting at the root of the tree.  
+
+	lookUP(T) : Use simple if statements to check for each node value. By using exact comparison, I can make sure that I am really looking for the listed arithmetic operators. Once I have located the correct arithmetic operator, I simply utilize that operator on their left and right child since we are assuming all input trees have two subtrees. By using recursion, I can use a bottom-up approach that goes down the subtree until we reach a value that is not an arithmetic operator(stringToFloat) and then operate on those values with the lastest arithmetic operator. 
+ 	
 
 
 
