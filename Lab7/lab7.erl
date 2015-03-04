@@ -49,11 +49,12 @@ filter(P,[X|XS]) ->
 % ---------------------------------------------------------------------- %
 
 % Check whether input is even or not
+% Use exact comparison since using integers
 even(X) ->
 	N = (X rem 2),
 	if
-		N == 0 -> true;
-		N == 1 -> false
+		N =:= 0 -> true;
+		N =:= 1 -> false
 	end.
 	
 % Extracts the evens out from a list
@@ -67,10 +68,10 @@ extractEvens(L) -> filter(fun even/1, L).
 alphaWord(A) ->
 	M = hd(A),
 	if
-		M == $a -> true;
-		M == $A -> true;
-		M /= $a -> false;
-		M /= $A -> false
+		M =:= $a -> true;
+		M =:= $A -> true;
+		M =/= $a -> false;
+		M =/= $A -> false
 	end.
 
 % Extracts all words that begin with an 'a' or an 'A'
@@ -162,10 +163,10 @@ evaluate(T) ->
 % mathematical expressions through operators
 lookUP(T) ->
 	if
-		T#binaryTreeNode.value == "+" -> lookUP(T#binaryTreeNode.left) + lookUP(T#binaryTreeNode.right);
-		T#binaryTreeNode.value == "-" -> lookUP(T#binaryTreeNode.left) - lookUP(T#binaryTreeNode.right);
-		T#binaryTreeNode.value == "*" -> lookUP(T#binaryTreeNode.left) * lookUP(T#binaryTreeNode.right);
-		T#binaryTreeNode.value == "/" -> lookUP(T#binaryTreeNode.left) / lookUP(T#binaryTreeNode.right);
+		T#binaryTreeNode.value =:= "+" -> lookUP(T#binaryTreeNode.left) + lookUP(T#binaryTreeNode.right);
+		T#binaryTreeNode.value =:= "-" -> lookUP(T#binaryTreeNode.left) - lookUP(T#binaryTreeNode.right);
+		T#binaryTreeNode.value =:= "*" -> lookUP(T#binaryTreeNode.left) * lookUP(T#binaryTreeNode.right);
+		T#binaryTreeNode.value =:= "/" -> lookUP(T#binaryTreeNode.left) / lookUP(T#binaryTreeNode.right);
 		true -> stringToFloat(T#binaryTreeNode.value)
 	end.
 
