@@ -1,3 +1,6 @@
+% Author: Johan Oakes and Dr. Turkett
+% Date: March 4, 2015
+
 -module(lab7).
 -export([isLarger/2, evaluate/1, findInTree/2, max/1, strcat/1, longStrings/1, logicalOR/1, extractAWords/1, extractEvens/1, map/2,reduce/2,filter/2,getStringTree/0,stringToFloat/1,getExpression1/0,getExpression2/0,getExpression3/0]).
 
