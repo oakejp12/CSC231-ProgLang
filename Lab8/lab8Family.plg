@@ -1,0 +1,28 @@
+/* Facts about who's male */
+
+male(william).
+male(billy).
+
+/* Facts about who's female */
+female(mary).
+female(laura).
+
+/* Facts describing parent, child relationships */ 
+parent(william,billy).
+parent(william,laura).
+parent(mary,billy).
+parent(mary,laura).
+
+/* A definition for siblings - share the same parent */
+siblings(X,Y) :- parent(Z,X), parent(Z,Y), X \= Y.
+
+/* A definition for mother - a female parent */
+mother(X,Y) :- parent(X,Y), female(X).
+
+/* Alternate definitions for grandmother (mother's mother or father's mother). */
+grandmother(X,Y) :- mother(X,Z), mother(Z,Y).
+/* Can't use the next entry because I haven't yet defined father */
+/* grandmother(X,Y) :- mother(X,Z), father(Z,Y). */
+/* Recursive definition of ancestor */
+ancestor(X,Y) :- parent(X,Y).
+ancestor(X,Y) :- parent(X,Z),ancestor(Z,Y).
