@@ -1,17 +1,55 @@
+/* Johan Oakes
+	Lab 8 - Intro to Prolog
+	3/26/15
+*/
+
+
 /* Facts about who's male */
 
 male(william).
 male(billy).
+male(johan).
+male(ken).
+male(alan).
+male(ashley).
+male(sam).
 
 /* Facts about who's female */
-female(mary).
+female(susan).
 female(laura).
+female(darling).
+female(mary).
+female(michelle).
+female(shelly).
+female(bobbie).
+female(elizabeth).
+female(karon).
+female(sharon).
+female(mae).
+
 
 /* Facts describing parent, child relationships */ 
 parent(william,billy).
 parent(william,laura).
-parent(mary,billy).
-parent(mary,laura).
+parent(susan,billy).
+parent(susan,laura).
+parent(ken, johan).
+parent(ken, darling).
+parent(ken, bobbie).
+parent(ken, shelly).
+parent(ken, michelle).
+parent(ken, amy).
+parent(mae, mary).
+parent(mae, ken).
+parent(alan, ashley).
+parent(alan, elizabeth).
+parent(mary, amy).
+parent(mary, michelle).
+parent(mary, shelly).
+parent(mary, johan).
+parent(mary, darling).
+parent(karon, sharon).
+
 
 /* A definition for siblings - share the same parent */
 siblings(X,Y) :- parent(Z,X), parent(Z,Y), X \= Y.
@@ -26,3 +64,52 @@ grandmother(X,Y) :- mother(X,Z), mother(Z,Y).
 /* Recursive definition of ancestor */
 ancestor(X,Y) :- parent(X,Y).
 ancestor(X,Y) :- parent(X,Z),ancestor(Z,Y).
+
+/* Definition for father */
+father(X,Y) :- parent(X,Y), male(X).
+
+/* Definition for daughter */
+daughter(X, Y) :- female(X), parent(Y, X).
+
+/* Definition for son */
+/* Son is the male, Y is the parent */
+son(X, Y) :- male(X), parent(Y, X).
+
+/* Definition for sister */
+/* Sister can't be a sister to herself */
+sister(X, Y) :- siblings(X, Y), female(X), X \= Y.
+
+/* Definition for brother */
+/* Brother can't be a brother to himself */
+brother(X, Y) :- siblings(X, Y), male(X), X \= Y.
+
+/* Definition for G'pa */ 
+grandfather(X, Y) :- father(X, Z), father(Z, Y).
+grandfather(X, Y) :- father(X, Z), mother(Z, Y).
+
+
+/* Definition for aunt */
+aunt(X, Y) :- sister(X, Z), mother(Z, Y).
+aunt(X, Y) :- sister(X, Z), father(Z, Y).
+
+/* Definition for unclde */
+uncle(X, Y) :- brother(X, Z), father(Z, Y).
+uncle(X, Y) :- brother(X, Z), mother(Z, Y).
+
+/* Definition for cousin */
+cousin(X, Y) :- parent(X, Z), uncle(Z, Y).
+cousin(X, Y) :- parent(X, Z), aunt(Z, Y).
+
+
+/* Problem 2 */
+
+/* isnatural(X) : X is a natural number if X = 0, or if X is > 0 
+	and X-1 is a natural number */
+isnatural(0). /* If X = 0 */ 
+isnatural(X) :- X > 0, Y is X - 1, isnatural(Y).
+
+/*    
+
+
+
+
