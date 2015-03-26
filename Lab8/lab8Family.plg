@@ -108,7 +108,22 @@ cousin(X, Y) :- parent(X, Z), aunt(Z, Y).
 isnatural(0). /* If X = 0 */ 
 isnatural(X) :- X > 0, Y is X - 1, isnatural(Y).
 
-/*    
+/* factorial(A,B) :  If A is 0, B is 1. For any number A > 0, B is the result of
+ multiplying A times the result of computing the factorial of A-1. */
+factorial(0, 1). /* If A is 0, B is 1 */
+factorial(A,B) :- A > 0, C is A - 1, factorial(C, J), B is A * J.
+
+
+/* fibonacci(A,B) : If A is 0 or 1,B is 1. For any number A > 1, 
+	B is the sum of the results from calling fibonacci on A-1 and fibonacci on A-2. */
+fibonacci(0,1).
+fibonacci(1,1).
+fibonacci(A,B) :- A > 1, C is A - 1, J is A - 2, fibonacci(C, N), fibonacci(J, G), B is N + G.
+
+/* Problem 3 */ 
+
+
+
 
 
 
