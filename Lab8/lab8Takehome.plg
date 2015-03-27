@@ -120,10 +120,85 @@ fibonacci(0,1).
 fibonacci(1,1).
 fibonacci(A,B) :- A > 1, C is A - 1, J is A - 2, fibonacci(C, N), fibonacci(J, G), B is N + G.
 
+
 /* Problem 3 */ 
 
+/* taken(Student, Dept, CourseNumber) */
+
+/* Math Courses to fulfill major */
+math(X) :- 
+taken(X, math, 112), 
+taken(X, math, 117), 
+optionalReq(X).
+
+/* optionalReq is chosen from 121, 205, 206 of required math courses */
+optionalReq(X) :- 
+taken(X, math, 121).
+optionalReq(X) :- 
+taken(X, math, 205).
+optionalReq(X) :- 
+taken(X, math, 206).
+
+/* Pick the essential CS courses */
+csCore :- 
+taken(X, cs, 111), 
+taken(X, cs, 112), 
+taken(X, cs, 211), 
+taken(X, cs, 221), 
+taken(X, cs, 222),
+taken(X, cs, 231),
+taken(X, cs, 241), 
+taken(X, cs, 399).
+
+/* Define the level 300 and above courses for student != 399 */
+csMore(X) :- 
+taken(X, cs, A), 
+taken(X, cs, B), 
+taken(X, cs, C), 
+taken(X, cs, D), 
+A > 299, B > 299, C > 299,  /* Represent 300 and above */
+A \= 399, B \= 399, C \= 399,  /* 399 is already listed */
+A \= B, A \= C, B \= C. 
+
+/* taken(Student, Dept, CourseNumber) */
+/* studentA has taken enough courses! */
+taken(studentA,cs,111).
+taken(studentA,cs,112).
+taken(studentA,cs,211).
+taken(studentA,cs,221).
+taken(studentA,cs,222).
+taken(studentA,cs,231).
+taken(studentA,cs,241).
+taken(studentA,math,112).
+taken(studentA,math,117).
+taken(studentA,math,121).
+taken(studentA,cs,391).
+taken(studentA,cs,385).
+taken(studentA,cs,343).
+taken(studentA,cs,341).
+taken(studentA,cs,399).
 
 
+/* studentB sucks and hasn't fulfilled the requirements */
+taken(studentB,cs,111).
+taken(studentB,cs,112).
+taken(studentB,cs,221).
+taken(studentB,cs,222).
+taken(studentB,cs,241).
+taken(studentB,math,111).
+taken(studentB,math,112).
+taken(studentB,math,205).
+
+/* Neither has studentC */
+taken(studentC,cs,241).
+taken(studentC,cs,111).
+taken(studentC,math, 111).
+taken(studentC,math, 205).
+taken(studentC,math,121).
+
+
+/* fulfilledCSMajor(Student) */
+fulfilledCSMajor(X) :- math(X), csCore(X), csMore(X).
 
 
 
