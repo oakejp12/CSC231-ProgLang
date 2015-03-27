@@ -1,0 +1,50 @@
+Johan Oakes
+Lab 8 Descriptions
+
+father(X, Y)
+	Takes an input X which represents the input of the father and another parameter Y which represents the child. I included parent and male in order to ensure that a man was selected instead of a female mother. 
+
+daughter(X,Y)
+	Takes an inputer X which is the daughter to be analyzed and another input Y which is the value for which we are testing. I included female(X) to ensure sex, and I reverse parent (Y, X) so that I could make sure that the test value was indeed the parent thus making X the daughter if female(X) proved true.
+
+son(X, Y)
+	Takes an input X which is the son, and Y which represents the test value. male(X) is included to ensure proper sex, and parent(Y, X) as well as for the same reason for daughter(X, Y)
+
+sister(X,Y)
+	Takes an input X which is the sister and Y is the test value. I include siblings to make sure that we aren't comparing parental relationship and indeed siblings, and female(X) to ensure female is the proper sex. 
+
+brother(X,Y)
+	Takes an input X which is the brother and Y is the test value. I include siblings to make sure that we aren't comparing parental relationship and indeed siblings, and male(X) to ensure male is the proper sex.
+
+grandfather(X,Y)
+	Takes an input X which represents the grandfather of test value Y. I also make sure that grandfather is the mother or the father to ensure both case of parental relationships of test value Y. 
+
+aunt(X, Y)
+	Takes an input X which represents the aunt of Y. Since an aunt is a sister of a father or a sister of a mother mother, I include all three methods to ensure the relationship holds. Sister ensures proper sex.
+
+uncle(X, Y)
+	Takes an input X which represents the uncle of Y. Since an uncle is a brother of a father or a brother of a mother, I include all three methods to ensure the relationship holds. brother(X,Z) ensures proper sex.
+
+cousin(X,Y)
+	Takes an input X which represents the cousin of Y. By calling parent(X,Z) and the uncle(Z, Y) method to see if person Z is a son and an uncle to person Y. If this relationship is satisfied, then we know that X must be a cousin to person Y. We also check the aunt relationship as this is always as possible as the uncle relationship. 
+
+-----------------
+
+isnatural(X)
+	Determine whether X is a natural number of not. I first check the base case : 0. We then recursively call isnatural(X-1) by setting Y to the variable (X - 1) in order to ensure X will equal 0 at some point. 
+	
+factorial(A, B):
+	I check the first two base cases. I then utilize the recursive function of fibonaci(A,B) in order to ensure that fibonacci(n-1) + fibonacci(n-2) is utilized. Those results are then stored in B to make another recursive call.
+
+-----------------
+
+math(X)
+	Takes an input student X in order to ensure that all of the required math courses are taken. optionalReq(X) is used in order to ensure that we can create a difference between the three required courses that may be chosen from. 
+
+optionalReq(X) :- explained above.
+
+csCore(X):
+	Takes an input student X in order to ensure that the core classes of the computer science major are taken. I make a difference between csCore and csMore so that the student has a choise in ~300 level courses to take. 
+
+csMore(X):
+	Takes an input student X in order to ensure that the rest of the required courses are fulfilled, but I don't set a hard line on which courses are available. By setting the students > 299, this fulfills the 300 above requirement, but that they don't choose from the required csCore 399 class. I also want to set a differentiation between these students. 
