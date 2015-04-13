@@ -142,7 +142,7 @@ sumAccumulator([X | Y], A, B) :- Sum is X + A, sumAccumulator(Y, Sum, B).
 /*                   																   */
 /* ----------------------------------------------------------------------------------- */
 
-/*
+/* DONE
 * 4. stringLessThan - 2 params (string1, string2)
 * Compare two strings, return true if string1 appears before string2 in dictionary
 */
