@@ -52,7 +52,7 @@ printString(A) :- writef("%s", [A]).
 /* START YOUR SOLUTIONS HERE */
 
 /* 
-* 1. insertSet - 3 parameters (atom, list, output list with atom inserted)
+* 1. insertSet - 3 params (atom, list, output list with atom inserted)
 * Atom should be inserted only if it's not already in the set
 */
 insertSet(A, [], [A]). /* Account for nothing in the list */
@@ -61,24 +61,67 @@ insertSet(A, [X | Y], [X | Z]) :- memberOfSet(A, [X | Y]), insertSet([], [X | Z]
 insertSet(A, [X | Y], [X | Z]) :- not(memberOfSet(A, [X|Y])), insertSet(A, Y, Z). /* If A is not in the set, then insert at back */
 
 /* 
-* deleteSet - 3 parameters (atom, list, output list with atom deleted if in set
-* TODO: Try to remake functions using memberOfSet()
-*
+* deleteSet - 3 params (atom, list, output list with atom deleted if in set
+* TODO Try to remake functions using memberOfSet(A, B)
+* FIXME Shouldn't have to make empty set case deleteSet(A, [], []) ? 
+	Look at the rest of the problem sets that utilize this. 
 */
-deleteSet(A, [], []).
+deleteSet(A, [], []). /* Account for empty list */ 
 deleteSet(A, [A | Y], OL) :- deleteSet(A, Y, L), append([], L, OL).
 deleteSet(A, [X | Y], OL) :- A \= X, deleteSet(A, Y, L), append([X], L, OL).
 
 
+/* ----------------------------------------------------------------------------------- */
+/*                   																   */
+/* ----------------------------------------------------------------------------------- */
 
 
+/* DONE
+* 2. count - 3 params (atom, list, output) 
+* output holds the number of times the atom passed as a parameter was found in the list
+*/ 
+count(A, [], 0). /* Take care of the empty list when the list has been shortened each time A is not the head or when A isn't present */
+count(A, [A | Y], NUM) :- count(A, Y, TEMP), NUM is TEMP + 1. /* If A is the head of the list, increment NUM by 1, then search tail */
+count(A, [X | Y], NUM) :- A \= X, count(A, Y, NUM). /* If A is not the head of the list, keep searching */
 
+/* ----------------------------------------------------------------------------------- */
+/*                   																   */
+/* ----------------------------------------------------------------------------------- */
 
+/* DONE
+* 3. Two functions listSum & listSum2
+* listSum - 2 params (list, output sum) : sums over the list
+*/
+listSum([], 0).
+listSum([X | Y], L) :- listSum(Y, Z), L is X + Z.
 
+/* listSum2 - 2 params (list, output sum) : sums over the list using accumulator approach */
+/* sumAccumulator - 3 params (list, accumulator sum, output sum) */
+listSum2(L, N) :- sumAccumulator(L, 0, N).
+sumAccumulator([], A, A). /* For any empty list, A is set to 0 to start accumulation */
+sumAccumulator([X | Y], A, B) :- Sum is X + A, sumAccumulator(Y, Sum, B).
 
+/* ----------------------------------------------------------------------------------- */
+/*                   																   */
+/* ----------------------------------------------------------------------------------- */
 
+/*
+* 4. stringLessThan - 2 params (string1, string2)
+* Compare two strings, return true if string1 appears before string2 in dictionary
+*/
+stringLessThan([], [X | Y]). /* Doesn't matter what second string is, not null */
+stringLessThan([X | _], [W | _]) :- X < W.
+stringLessThan([X | Y], [W | Z]) :- X = W, stringLessThan(Y, Z).
 
+/* ----------------------------------------------------------------------------------- */
+/*                   																   */
+/* ----------------------------------------------------------------------------------- */
 
-
-
+/* DONE
+* 5. strcat - Generates a single string which is concatenation of a given set of strings
+* ex. ["Hey", "You", "Guys"] -> HeyYouGuys
+* TODO Use recursion, test: ?-(strcat(["Hey","You","Guys"],A), printString(A).)
+*/
+strcat([], []). /* Empty strings */
+strcat([X | Y], A) :- strcat(Y, L), append(X, L, A). 
 
