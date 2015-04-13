@@ -12,7 +12,7 @@ notInList(X,Y) :- not(memberOfSet(X,Y)).
 listlength([],0).
 listlength([_|Y],L) :- listlength(Y,Z), L is 1+Z.
 
-stringlength(X,L) :- listlength(X,L).
+stringlength(X, L) :- listlength(X,L).
 
 listlength2(L,N) :- lengthAccumulator(L,0,N).
 lengthAccumulator([],A,A).
@@ -27,6 +27,43 @@ word(likes).
 word(hates).
 word(mary).
 word(wine).
+
+/* ----------------------------------------------------------------------------------- */
+/*                   																   */
+/* ----------------------------------------------------------------------------------- */
+
+/* 
+* 6 - Revise grammar introduced in the lab so that the sentence, noun_phrase, and
+	verb_phrase non-terminals are represented as:
+* 	sentence -> noun_phrase verb_phrase
+*	noun_phrase -> determinant noun | determinant adjective noun
+* 	verb_phrase -> verb noun_phrase
+* Add rules: ('a', 'the', 'smelly' are all non-terminals)
+* 	determinant -> a | the
+*	adjective -> smelly
+
+* TODO: Do I need to test our the decompositions of words?
+*/
+
+/* Describe the terminals in the language */
+word(a).
+word(the).
+word(smelly).
+
+/* Describe valid decompositions - New Rules */
+compose(adjective, [smelly]).
+compose(determinant, [a]).
+compose(determinant, [the]).
+
+/* Rules implemented in place of original decompositions */
+compose(sentence, [noun_phrase, verb_phrase]).
+compose(noun_phrase, [determinant, noun]).
+compose(noun_phrase, [determinant, adjective, noun]).
+compose(verb_phrase, [verb, noun_phrase]).
+
+/* ----------------------------------------------------------------------------------- */
+/*                   																   */
+/* ----------------------------------------------------------------------------------- */
 
 compose(noun, [john]).
 compose(noun, [mary]).
@@ -63,10 +100,10 @@ insertSet(A, [X | Y], [X | Z]) :- not(memberOfSet(A, [X|Y])), insertSet(A, Y, Z)
 /* 
 * deleteSet - 3 params (atom, list, output list with atom deleted if in set
 * TODO Try to remake functions using memberOfSet(A, B)
-* FIXME Shouldn't have to make empty set case deleteSet(A, [], []) ? 
+* FIXME Shouldn't have to make empty set case deleteSet(_, [], []) ? 
 	Look at the rest of the problem sets that utilize this. 
 */
-deleteSet(A, [], []). /* Account for empty list */ 
+deleteSet(_, [], []). /* Account for empty list */ 
 deleteSet(A, [A | Y], OL) :- deleteSet(A, Y, L), append([], L, OL).
 deleteSet(A, [X | Y], OL) :- A \= X, deleteSet(A, Y, L), append([X], L, OL).
 
@@ -80,7 +117,7 @@ deleteSet(A, [X | Y], OL) :- A \= X, deleteSet(A, Y, L), append([X], L, OL).
 * 2. count - 3 params (atom, list, output) 
 * output holds the number of times the atom passed as a parameter was found in the list
 */ 
-count(A, [], 0). /* Take care of the empty list when the list has been shortened each time A is not the head or when A isn't present */
+count(_, [], 0). /* Take care of the empty list when the list has been shortened each time A is not the head or when A isn't present */
 count(A, [A | Y], NUM) :- count(A, Y, TEMP), NUM is TEMP + 1. /* If A is the head of the list, increment NUM by 1, then search tail */
 count(A, [X | Y], NUM) :- A \= X, count(A, Y, NUM). /* If A is not the head of the list, keep searching */
 
@@ -109,7 +146,7 @@ sumAccumulator([X | Y], A, B) :- Sum is X + A, sumAccumulator(Y, Sum, B).
 * 4. stringLessThan - 2 params (string1, string2)
 * Compare two strings, return true if string1 appears before string2 in dictionary
 */
-stringLessThan([], [X | Y]). /* Doesn't matter what second string is, not null */
+stringLessThan([], [_]). /* Doesn't matter what second string is, not null */
 stringLessThan([X | _], [W | _]) :- X < W.
 stringLessThan([X | Y], [W | Z]) :- X = W, stringLessThan(Y, Z).
 
@@ -120,8 +157,12 @@ stringLessThan([X | Y], [W | Z]) :- X = W, stringLessThan(Y, Z).
 /* DONE
 * 5. strcat - Generates a single string which is concatenation of a given set of strings
 * ex. ["Hey", "You", "Guys"] -> HeyYouGuys
-* TODO Use recursion, test: ?-(strcat(["Hey","You","Guys"],A), printString(A).)
+* Use recursion, test: ?-(strcat(["Hey","You","Guys"],A), printString(A).)
 */
 strcat([], []). /* Empty strings */
 strcat([X | Y], A) :- strcat(Y, L), append(X, L, A). 
+
+
+
+
 
