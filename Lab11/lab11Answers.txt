@@ -1,0 +1,85 @@
+[trace]  ?- insertSet(4, [1,2,3], [1,2,3,4]).
+   Call: (6) insertSet(4, [1, 2, 3], [1, 2, 3, 4]) ? creep
+   Call: (7) 4\=1 ? creep
+   Exit: (7) 4\=1 ? creep
+   Call: (7) insertSet(4, [2, 3], _G1952) ? creep
+   Call: (8) 4\=2 ? creep
+   Exit: (8) 4\=2 ? creep
+   Call: (8) insertSet(4, [3], _G1952) ? creep
+   Call: (9) 4\=3 ? creep
+   Exit: (9) 4\=3 ? creep
+   Call: (9) insertSet(4, [], _G1952) ? creep
+   Exit: (9) insertSet(4, [], [4]) ? creep
+   Call: (9) lists:append([3], [4], _G1958) ? creep
+   Exit: (9) lists:append([3], [4], [3, 4]) ? creep
+   Exit: (8) insertSet(4, [3], [3, 4]) ? creep
+   Call: (8) lists:append([2], [3, 4], _G1964) ? creep
+   Exit: (8) lists:append([2], [3, 4], [2, 3, 4]) ? creep
+   Exit: (7) insertSet(4, [2, 3], [2, 3, 4]) ? creep
+   Call: (7) lists:append([1], [2, 3, 4], [1, 2, 3, 4]) ? creep
+   Exit: (7) lists:append([1], [2, 3, 4], [1, 2, 3, 4]) ? creep
+   Exit: (6) insertSet(4, [1, 2, 3], [1, 2, 3, 4]) ? creep
+true .
+
+[trace]  ?- insertSet2(4, [1,2,3], [1,2,3,4]).
+   Call: (6) insertSet2(4, [1, 2, 3], [1, 2, 3, 4]) ? creep
+   Call: (7) insertSet2(4, [2, 3], _G1952) ? creep
+   Call: (8) insertSet2(4, [3], _G1952) ? creep
+   Call: (9) insertSet2(4, [], _G1952) ? creep
+   Exit: (9) insertSet2(4, [], [4]) ? creep
+   Call: (9) lists:append([3], [4], _G1958) ? creep
+   Exit: (9) lists:append([3], [4], [3, 4]) ? creep
+   Exit: (8) insertSet2(4, [3], [3, 4]) ? creep
+   Call: (8) lists:append([2], [3, 4], _G1964) ? creep
+   Exit: (8) lists:append([2], [3, 4], [2, 3, 4]) ? creep
+   Exit: (7) insertSet2(4, [2, 3], [2, 3, 4]) ? creep
+   Call: (7) lists:append([1], [2, 3, 4], [1, 2, 3, 4]) ? creep
+   Exit: (7) lists:append([1], [2, 3, 4], [1, 2, 3, 4]) ? creep
+   Exit: (6) insertSet2(4, [1, 2, 3], [1, 2, 3, 4]) ? creep
+true .
+
+
+[trace]  ?- count(4, [1,2,3,4,4], 2).
+   Call: (6) count(4, [1, 2, 3, 4, 4], 2) ? creep
+   Call: (7) 4\=1 ? creep
+   Exit: (7) 4\=1 ? creep
+   Call: (7) count(4, [2, 3, 4, 4], 2) ? creep
+   Call: (8) 4\=2 ? creep
+   Exit: (8) 4\=2 ? creep
+   Call: (8) count(4, [3, 4, 4], 2) ? creep
+   Call: (9) 4\=3 ? creep
+   Exit: (9) 4\=3 ? creep
+   Call: (9) count(4, [4, 4], 2) ? creep
+   Call: (10) count(4, [4], _G1940) ? creep
+   Call: (11) count(4, [], _G1940) ? creep
+   Exit: (11) count(4, [], 0) ? creep
+   Call: (11) _G1941 is 1+0 ? creep
+   Exit: (11) 1 is 1+0 ? creep
+   Exit: (10) count(4, [4], 1) ? creep
+   Call: (10) 2 is 1+1 ? creep
+   Exit: (10) 2 is 1+1 ? creep
+   Exit: (9) count(4, [4, 4], 2) ? creep
+   Exit: (8) count(4, [3, 4, 4], 2) ? creep
+   Exit: (7) count(4, [2, 3, 4, 4], 2) ? creep
+   Exit: (6) count(4, [1, 2, 3, 4, 4], 2) ? creep
+true .
+
+[trace]  ?- count2(4, [1,2,3,4,4], 2).
+   Call: (6) count2(4, [1, 2, 3, 4, 4], 2) ? creep
+   Call: (7) count2(4, [2, 3, 4, 4], 2) ? creep
+   Call: (8) count2(4, [3, 4, 4], 2) ? creep
+   Call: (9) count2(4, [4, 4], 2) ? creep
+   Call: (10) count2(4, [4], _G1940) ? creep
+   Call: (11) count2(4, [], _G1940) ? creep
+   Exit: (11) count2(4, [], 0) ? creep
+   Call: (11) _G1941 is 1+0 ? creep
+   Exit: (11) 1 is 1+0 ? creep
+   Exit: (10) count2(4, [4], 1) ? creep
+   Call: (10) 2 is 1+1 ? creep
+   Exit: (10) 2 is 1+1 ? creep
+   Exit: (9) count2(4, [4, 4], 2) ? creep
+   Exit: (8) count2(4, [3, 4, 4], 2) ? creep
+   Exit: (7) count2(4, [2, 3, 4, 4], 2) ? creep
+   Exit: (6) count2(4, [1, 2, 3, 4, 4], 2) ? creep
+true.
+
